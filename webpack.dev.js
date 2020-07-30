@@ -1,53 +1,34 @@
-const path = require('path')
-const webpack = require('webpack')
-const HtmlWebPackPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const webpackpwaManifest = require('webpack-pwa-manifest')
+const path = require('path');
+const common = require('./webpack.common');
+const {merge} = require('webpack-merge');
+const WorkboxPlugin = require('workbox-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
-
-module.exports = {
+module.exports = merge(common, {
     mode: 'development',
-    devtool: 'source-map',
-    entry: './src/client/index.js',
     output: {
-        libraryTarget: 'var',
-        library: 'Client'
+        filename: '[name].bundle.js',
+        path: path.resolve(__dirname, 'dist')
     },
-    devtool: 'source-map',
-    stats: 'verbose',
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/client/views/index.html',
+            filename: 'index.html'
+        }),
+        new WorkboxPlugin.GenerateSW({
+
+            clientsClaim: true,
+            skipWaiting: true,
+        }),
+        new ManifestPlugin()
+    ],
     module: {
         rules: [
             {
-                test: '/\.js$/',
-                exclude: /node_modules/,
-                loader: "babel-loader"
-            },
-            {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
-            },
-            {
-                test: /\.webmanifest$/,
-                
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
-    },
-    plugins: [
-        new HtmlWebPackPlugin({
-            template: "./src/client/views/index.html",
-            filename: "./index.html",
-        }),
-        new CleanWebpackPlugin({
-            // Simulate the removal of files
-            dry: true,
-            // Write Logs to Console
-            verbose: true,
-            // Automatically remove all unused webpack assets on rebuild
-            cleanStaleWebpackAssets: true,
-            protectWebpackAssets: false
-        }),
-        new webpackpwaManifest ({
-            name:'myApp'
-        })
-    ]
-}
+    }
+});

@@ -1,43 +1,46 @@
 <html lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Test</title>
-        <link rel="stylesheet" href="/styles/resets.css">
-        <link rel="stylesheet" href="/styles/base.css">
-        <link rel="stylesheet" href="/styles/header.css">
-        <link rel="stylesheet" href="/styles/form.css">
-        <link rel="stylesheet" href="/styles/footer.css">
-        <link rel = "manifest" href="manifest.webmanifest">
+        
+        
     </head>
 
     <body>
 
         <header>
-            <div class="">
-                Logo
+            <div class="Logo">
+                Welcome to Sentimento
             </div>
-            <div class="">
-                navigation
+            <div class="content">
+                Honestly, we live in world filled with missinformation and fake news. 
+                From facebook to twitter to fox news, it is hard to differentiate fiction from non-fiction.
+                Sentimento helps you varify the validate and accuracy news articles. So give it a try
             </div>
         </header>
 
 
 <section>
-    <form class="" onsubmit="return Client.handleSubmit(event)">
-        <input id="name" type="text" name="input" value="" onblur="onBlur()" placeholder="Name">
-        <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return handleSubmit(event)">
+    <form id="textForm" >
+        <textarea id="name" name="input"> 
+
+        </textarea>
+        <br><br>
+        <input id="result" type="submit" name="" value="submit" >
     </form>
-<section>
+</section>
 
 
-    <section>
+    <section>      
+        <div id="results">
         <strong>Form Results:</strong>
-        <div id="results"></div>
+        </div>
     </section>
 </main>
 
 <footer>
-    <p>This is a footer</p>
+    <p></p>
 </footer>
 
 </body>
