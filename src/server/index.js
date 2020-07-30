@@ -36,9 +36,9 @@ app.get('/process', async function (req, res) {
     
 })
 
-
+const port = process.env.PORT||8082;
 // designates what port the app will listen to for incoming requests
-app.listen(8082, function () {
+app.listen(port, function () {
     console.log('Example app listening on port 8082!')
 })
 
